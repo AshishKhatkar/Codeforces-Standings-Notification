@@ -1,0 +1,47 @@
+'''
+@author : Ashish Khatkar (ashish1610)
+'''
+import urllib2
+import json as JSON
+import pynotify
+import time
+import calendar
+
+master_url = "http://codeforces.com/api"
+
+print "Enter contest id : ",
+contest_id = input()
+contest_list = urllib2.urlopen("http://codeforces.com/api/contest.list?gym=false")
+jsoned_list = JSON.loads(contest_list.read())
+contest_start_time = 0
+contest_end_time = 0
+for contest in jsoned_list['result']:
+	if contest['id'] == contest_id:
+		contest_start_time = contest['startTimeSeconds']
+		contest_end_time = contest_start_time + contest['durationSeconds']
+# print contest_start_time, contest_end_time
+
+users_file = open("user.txt", "r")
+user_names = users_file.readline()
+# print user_names
+
+contest_standing = urllib2.urlopen(master_url + "/contest.standings?contestId="+str(contest_id)+"&handles="+user_names)
+jsoned_standing = JSON.loads(contest_standing.read())
+id_map = {1:'A', 2:'B', 3:'C', 4:'D', 5:'E'}
+pynotify.init("Basic")
+# print calendar.timegm(time.gmtime())
+while calendar.timegm(time.gmtime()) < contest_end_time:
+	notificationData = "Username		:	Rank 	:	Points 	:	Solved"
+	notificationData += "\n"
+	for row in jsoned_standing['result']['rows']:
+		for member in row['party']['members']:
+			notificationData += member['handle'] + "		:	" + str(row['rank']) + "	:	" + str(row['points']) + "	:	"
+			cnt = 0
+			for prob in row['problemResults']:
+				if prob['points'] > 0:
+					cnt += 1
+					notificationData += id_map[cnt] + " "
+			notificationData += "\n"
+	notification = pynotify.Notification("Current Rankings", notificationData)
+	notification.show()
+	time.sleep(600)
