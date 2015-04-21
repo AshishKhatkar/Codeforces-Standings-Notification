@@ -3,7 +3,6 @@
 '''
 import urllib2
 import json as JSON
-import pynotify
 import time
 import calendar
 import gtkPopupNotify
