@@ -8,4 +8,5 @@ ashish1610;lifecodemohit;kshitij_jain<br>
 4) You will be able to see the username, current rank of that user, current points, problems solved.<br>
 
 <h3>System Requirements</h3>
-Python configured with urllib2, json, pynotify, time and calendar libraries
+Linux machine with Python configured with urllib2, json, pynotify, time and calendar libraries.<br>
+As of now pynotify is not available on windows will create a similar script for windows soon.
