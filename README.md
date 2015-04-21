@@ -9,4 +9,10 @@ ashish1610;lifecodemohit;kshitij_jain<br>
 
 <h3>System Requirements</h3>
 Linux machine with Python configured with urllib2, json, pynotify, time and calendar libraries.<br>
-As of now pynotify is not available on windows will create a similar script for windows soon.
+Windows machine with Python configured with urllib2, json, gtk, gobject, time and calendar libraries.<br>
+For Windows machine download both codeforces_windows.py and gtkPopupNotify.py<br>
+Both the files should be in the same directory.
+
+<h3>Refrences</h3>
+I have used gtkPopNotify.py from this link https://github.com/woodenbrick/gtkPopupNotify <br>
+I don't claim any right over gtkPopNotify file.
