@@ -28,6 +28,12 @@ users_file = open("user.txt", "r")
 user_names = users_file.readline()
 # print user_names
 
+# Waiting for the contest to start
+if current_contest['phase'] == "BEFORE":
+	print "Waiting for contest to start"
+	while current_contest['phase'] == "BEFORE":
+		time.sleep(10)
+
 contest_standing = urllib2.urlopen(master_url + "/contest.standings?contestId="+str(contest_id)+"&handles="+user_names)
 jsoned_standing = JSON.loads(contest_standing.read())
 id_map = {1:'A', 2:'B', 3:'C', 4:'D', 5:'E'}
