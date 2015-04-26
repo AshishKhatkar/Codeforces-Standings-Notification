@@ -43,8 +43,6 @@ if current_contest['phase'] == "BEFORE":
 	while current_contest['phase'] == "BEFORE":
 		time.sleep(10)
 
-contest_standing = urllib2.urlopen(master_url + "/contest.standings?contestId="+str(contest_id)+"&handles="+user_names)
-jsoned_standing = JSON.loads(contest_standing.read())
 id_map = {1:'A', 2:'B', 3:'C', 4:'D', 5:'E'}
 
 notificationstack = gtkPopupNotify.NotificationStack(600)
@@ -54,6 +52,8 @@ notificationstack = gtkPopupNotify.NotificationStack(600)
 while calendar.timegm(time.gmtime()) < contest_end_time:
 	notificationData = "Username		:	Rank 	:	Points 	:	Solved"
 	notificationData += "\n"
+	contest_standing = urllib2.urlopen(master_url + "/contest.standings?contestId="+str(contest_id)+"&handles="+user_names)
+	jsoned_standing = JSON.loads(contest_standing.read())
 	for row in jsoned_standing['result']['rows']:
 		for member in row['party']['members']:
 			notificationData += member['handle'] + "		:	" + str(row['rank']) + "    	:	" + str(row['points']) + "	:	"
@@ -80,6 +80,8 @@ while current_contest['phase'] != 'FINISHED':
 # Printing final standings
 notificationData = "Username		:	Rank 	:	Points 	:	Solved"
 notificationData += "\n"
+contest_standing = urllib2.urlopen(master_url + "/contest.standings?contestId="+str(contest_id)+"&handles="+user_names)
+jsoned_standing = JSON.loads(contest_standing.read())
 for row in jsoned_standing['result']['rows']:
 	for member in row['party']['members']:
 		notificationData += member['handle'] + "		:	" + str(row['rank']) + "	:	" + str(row['points']) + "	:	"
