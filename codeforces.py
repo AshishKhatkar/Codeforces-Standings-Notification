@@ -55,7 +55,7 @@ while calendar.timegm(time.gmtime()) < contest_end_time:
 			notificationData += "\n"
 	notification = pynotify.Notification("Current Rankings", notificationData)
 	notification.show()
-	time.sleep(600)
+	time.sleep(300)
 
 # Waiting while the contest is not over
 while current_contest['phase'] != 'FINISHED':

@@ -66,7 +66,7 @@ while calendar.timegm(time.gmtime()) < contest_end_time:
 	gobject.timeout_add(10000, notify_factory)
 	gobject.timeout_add(20000, gtk_main_quit)
 	gtk.main()
-	time.sleep(600)
+	time.sleep(300)
 
 # Waiting while the contest is not over
 while current_contest['phase'] != 'FINISHED':
