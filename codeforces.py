@@ -31,8 +31,13 @@ user_names = users_file.readline()
 # Waiting for the contest to start
 if current_contest['phase'] == "BEFORE":
 	print "Waiting for contest to start"
-	while current_contest['phase'] == "BEFORE":
-		time.sleep(10)
+	while current_contest['phase'] == 'BEFORE':
+		contest_list = urllib2.urlopen("http://codeforces.com/api/contest.list?gym=false")
+		jsoned_list = JSON.loads(contest_list.read())
+		for contest in jsoned_list['result']:
+			if contest['id'] == contest_id:
+				current_contest = contest
+				break
 
 id_map = {1:'A', 2:'B', 3:'C', 4:'D', 5:'E'}
 pynotify.init("Basic")
