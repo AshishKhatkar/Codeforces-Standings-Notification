@@ -64,8 +64,8 @@ while calendar.timegm(time.gmtime()) < contest_end_time:
 			notificationData += member['handle'] + "		:	" + str(row['rank']) + "    	:	" + str(row['points']) + "	:	"
 			cnt = 0
 			for prob in row['problemResults']:
+				cnt += 1;
 				if prob['points'] > 0:
-					cnt += 1
 					notificationData += id_map[cnt] + " "
 			notificationData += "\n"
 	gobject.timeout_add(10000, notify_factory)
