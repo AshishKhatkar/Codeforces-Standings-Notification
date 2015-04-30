@@ -81,8 +81,8 @@ for row in jsoned_standing['result']['rows']:
 		notificationData += member['handle'] + "		:	" + str(row['rank']) + "	:	" + str(row['points']) + "	:	"
 		cnt = 0
 		for prob in row['problemResults']:
+			cnt += 1
 			if prob['points'] > 0:
-				cnt += 1
 				notificationData += id_map[cnt] + " "
 		notificationData += "\n"
 notification = pynotify.Notification("Final Rankings", notificationData)
